@@ -6,6 +6,7 @@ public class Board {
 	private int columns;
 	private Piece[][] pieces;
 	
+	//Geração do tabuleiro
 	public Board(int rows, int columns) {
 		if(rows < 1 || columns < 1) {
 			throw new BoardException("Erro criando tabuleiro: é necessário que haja pelo menos 1 linha e uma coluna");
@@ -37,6 +38,7 @@ public class Board {
 		return pieces[position.getRow()][position.getColumn()];
 	}
 	
+	//Alocação da peça
 	public void placePiece(Piece piece, Position position) {
 		if(thereIsAPiece(position)) {
 			throw new BoardException("Há uma peça na posição " + position);
@@ -45,6 +47,7 @@ public class Board {
 		piece.position = position;
 	}
 	
+	//Filtragem
 	private boolean positionExists(int row, int column) {
 		return row >= 0 && row < rows && column >= 0 && column < columns;
 	}
