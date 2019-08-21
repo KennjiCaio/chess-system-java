@@ -80,7 +80,7 @@ public class ChessMatch {
 		Position source = sourcePosition.toPosition();
 		Position target = targetPosition.toPosition();
 		validateSourcePosition(source);
-		validadeTargetPosition(source, target);
+		validateTargetPosition(source, target);
 		Piece capturedPiece = makeMove(source, target);
 		
 		if (testCheck(currentPlayer)) {
@@ -93,7 +93,7 @@ public class ChessMatch {
 		// #SpecialMove promotion
 		promoted = null;
 		if(movedPiece instanceof Pawn) {
-			if(movedPiece.getColor() == Color.WHITE && target.getRow() == 0 || movedPiece.getColor() == Color.BLACK && target.getRow() == 7) {
+			if((movedPiece.getColor() == Color.WHITE && target.getRow() == 0) || (movedPiece.getColor() == Color.BLACK && target.getRow() == 7)) {
 				promoted = (ChessPiece) board.piece(target);
 				promoted = replacePromotedPiece("Q");
 			}
@@ -109,7 +109,7 @@ public class ChessMatch {
 		}
 		
 		// #SpecialMove en passant
-		if(movedPiece instanceof Pawn && (target.getRow() == source.getRow() - 2) || target.getRow() == source.getRow() + 2) {
+		if(movedPiece instanceof Pawn && (target.getRow() == source.getRow() - 2 || target.getRow() == source.getRow() + 2)) {
 			enPassantVulnerable = movedPiece;
 		}
 		else {
@@ -253,7 +253,7 @@ public class ChessMatch {
 		}
 	}
 	
-	private void validadeTargetPosition(Position source, Position target) {
+	private void validateTargetPosition(Position source, Position target) {
 		if(!board.piece(source).possibleMove(target)) {
 			throw new ChessException("A peca escolhida nao pode se mover para o seu destino");
 		}
